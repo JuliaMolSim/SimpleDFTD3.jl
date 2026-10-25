@@ -1,0 +1,6 @@
+[deps]
+Clang = "40e3b903-d033-50b4-a0cc-940c62c95e31"
+simple_dftd3_jll = "c8413a5c-ae8a-5c43-bf13-ff707ecf23a8"
+
+[compat]
+simple_dftd3_jll = "=1.6.0"

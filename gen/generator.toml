@@ -1,0 +1,13 @@
+[general]
+library_name = "libsdftd3"
+output_file_path = "LibSDFTD3.jl"
+module_name = "LibSDFTD3"
+jll_pkg_name = "simple_dftd3_jll"
+prologue_file_path = "prologue.jl"
+extract_c_comment_style = "doxygen"
+print_using_CEnum = false
+# The type-generic `dftd3_delete` macro has no Julia equivalent
+output_ignorelist = ["dftd3_delete"]
+
+[codegen]
+use_ccall_macro = false

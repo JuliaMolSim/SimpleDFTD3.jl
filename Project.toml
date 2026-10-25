@@ -1,0 +1,20 @@
+name = "SimpleDFTD3"
+uuid = "fe85623b-bee7-4aac-b682-558b6887eb82"
+authors = ["Michael F. Herbst <info@michael-herbst.com>"]
+version = "0.1.0"
+
+[deps]
+simple_dftd3_jll = "c8413a5c-ae8a-5c43-bf13-ff707ecf23a8"
+
+[compat]
+LinearAlgebra = "1"
+Test = "1"
+julia = "1.10"
+simple_dftd3_jll = "=1.6.0"
+
+[extras]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["LinearAlgebra", "Test"]
