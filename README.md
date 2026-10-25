@@ -1,5 +1,18 @@
 # SimpleDFTD3.jl
 
+| **Build Status**                       |  **License**                     |
+|:-------------------------------------- |:-------------------------------- |
+| ![][ci-img] [![][ccov-img]][ccov-url]  | [![][license-img]][license-url]  |
+
+[ci-img]: https://github.com/JuliaMolSim/SimpleDFTD3.jl/workflows/CI/badge.svg
+
+[ccov-img]: https://codecov.io/gh/JuliaMolSim/SimpleDFTD3.jl/branch/master/graph/badge.svg?token=ZL7RUND4YE
+[ccov-url]: https://codecov.io/gh/JuliaMolSim/SimpleDFTD3.jl
+
+[license-img]: https://img.shields.io/github/license/JuliaMolSim/SimpleDFTD3.jl.svg?maxAge=2592000
+[license-url]: https://github.com/JuliaMolSim/SimpleDFTD3.jl/blob/master/LICENSE
+
+
 Julia bindings to [simple-dftd3](https://github.com/dftd3/simple-dftd3), the
 library implementation of the DFT-D3 dispersion correction and the geometric
 counterpoise correction (gCP).
