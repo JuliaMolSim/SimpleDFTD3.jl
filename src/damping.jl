@@ -9,6 +9,36 @@ function free!(d::AbstractDamping)
 end
 
 #
+# Construction from an identifier
+#
+"""
+    Damping(identifier, method; atm=false)
+
+Load the damping parameters stored for `method` for the damping with the given
+`identifier`. For example `Damping("D3(0)", "pbe")` gives `ZeroDamping("pbe")`.
+"""
+function Damping(identifier::AbstractString, method::AbstractString; atm::Bool=false)
+    if identifier == "D3(BJ)"
+        RationalDamping(method; atm)
+    elseif identifier == "D3(0)"
+        ZeroDamping(method; atm)
+    elseif identifier == "D3M(BJ)"
+        ModifiedRationalDamping(method; atm)
+    elseif identifier == "D3M(0)"
+        ModifiedZeroDamping(method; atm)
+    elseif identifier == "D3(op)"
+        OptimizedPowerDamping(method; atm)
+    elseif identifier == "D3(CSO)"
+        CSODamping(method; atm)
+    elseif identifier == "D3(Z)"
+        ZDamping(method; atm)
+    else
+        throw(ArgumentError("Unknown damping identifier \"$identifier\", expected one of " *
+                            "D3(BJ), D3(0), D3M(BJ), D3M(0), D3(op), D3(CSO), D3(Z)."))
+    end
+end
+
+#
 # RationalDamping
 #
 mutable struct RationalDamping <: AbstractDamping
@@ -234,34 +264,4 @@ end
 function ZDamping(method::AbstractString; atm::Bool=false)
     ptr = with_error(err -> LibSDFTD3.dftd3_load_z_damping(err, method, atm))
     finalizer(free!, ZDamping(ptr))
-end
-
-#
-# Construction from an identifier
-#
-"""
-    Damping(identifier, method; atm=false)
-
-Load the damping parameters stored for `method` for the damping with the given
-`identifier`. For example `Damping("D3(0)", "pbe")` gives `ZeroDamping("pbe")`.
-"""
-function Damping(identifier::AbstractString, method::AbstractString; atm::Bool=false)
-    if identifier == "D3(BJ)"
-        RationalDamping(method; atm)
-    elseif identifier == "D3(0)"
-        ZeroDamping(method; atm)
-    elseif identifier == "D3M(BJ)"
-        ModifiedRationalDamping(method; atm)
-    elseif identifier == "D3M(0)"
-        ModifiedZeroDamping(method; atm)
-    elseif identifier == "D3(op)"
-        OptimizedPowerDamping(method; atm)
-    elseif identifier == "D3(CSO)"
-        CSODamping(method; atm)
-    elseif identifier == "D3(Z)"
-        ZDamping(method; atm)
-    else
-        throw(ArgumentError("Unknown damping identifier \"$identifier\", expected one of " *
-                            "D3(BJ), D3(0), D3M(BJ), D3M(0), D3(op), D3(CSO), D3(Z)."))
-    end
 end
