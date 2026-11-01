@@ -22,6 +22,24 @@ end
     @test dispersion_identifier(ZDamping(s8=1.0, a1=200770.0)) == "D3(Z)"
 end
 
+@testset "Damping from identifier" begin
+    m = DispersionModel(MB16_NUMBERS, MB16_POSITIONS)
+    for T in (RationalDamping, ZeroDamping, ModifiedRationalDamping, ModifiedZeroDamping,
+              OptimizedPowerDamping, CSODamping)
+        for atm in (false, true)
+            ref = T("pbe"; atm)
+            damping = Damping(dispersion_identifier(ref), "pbe"; atm)
+            @test damping isa T
+            @test dispersion(m, damping).energy ≈ dispersion(m, ref).energy atol=1e-14
+        end
+    end
+    # No Z-damping parameters are stored, so only the dispatch can be checked
+    @test_throws DFTD3Error Damping("D3(Z)", "pbe")
+
+    err = @test_throws ArgumentError Damping("D3(XYZ)", "pbe")
+    @test occursin("D3(XYZ)", err.value.msg)
+end
+
 @testset "Libxc mapping" begin
     @test dftd3_method_name([:gga_x_pbe, :gga_c_pbe]) == "pbe"
     @test dftd3_method_name([:gga_c_pbe, :gga_x_pbe]) == "pbe"

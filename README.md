@@ -66,6 +66,9 @@ Full customisation is available by passing the parameters verbatim:
 RationalDamping(s8=0.7875, a1=0.4289, a2=4.4407)  # s6=1, s9=1, alp=14 by default
 ```
 `dispersion_identifier(damping)` returns a short label such as `"D3(BJ)"`.
+Conversely `Damping(identifier, method; atm=false)` loads the stored parameters
+for the damping with this label, e.g. `Damping("D3(0)", "pbe")` is
+`ZeroDamping("pbe")`.
 
 
 ### Periodic systems

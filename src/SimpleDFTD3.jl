@@ -28,7 +28,7 @@ end
 export DFTD3Error
 export DispersionModel, GeometricCounterpoise, update_structure!, dispersion_identifier
 export set_realspace_cutoff!, set_ewald_summation!, set_ghost_atoms!, set_work_partition!
-export AbstractDamping, ZeroDamping, RationalDamping, ModifiedZeroDamping,
+export Damping, Damping, ZeroDamping, RationalDamping, ModifiedZeroDamping,
        ModifiedRationalDamping, OptimizedPowerDamping, CSODamping, ZDamping
 export dispersion, dispersion!, pairwise_dispersion, dispersion_hessian
 export counterpoise, counterpoise!, counterpoise_hessian
